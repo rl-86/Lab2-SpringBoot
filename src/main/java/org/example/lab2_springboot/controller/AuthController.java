@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -45,15 +46,17 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(), loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
         Optional<User> userDetails = userRepository.findByUsername(loginRequest.getUsername());
         if (userDetails.isEmpty()) {
             return ResponseEntity.badRequest().body("Invalid credentials");
         }
 
-        String token = jwtUtil.generateToken(userDetails.get().getUsername());
+        List<String> roles = userDetails.get().getRoles().stream().toList();
+        String token = jwtUtil.generateToken(userDetails.get().getUsername(), roles);
+
         return ResponseEntity.ok(token);
     }
+
 }
