@@ -1,81 +1,90 @@
 # Encore Leshan Demo
 
-This project combines the [Eclipse Leshan LwM2M Server](https://github.com/rikard-sics/leshan) with an Encore-based backend API for secure device bootstrapping and configuration.
+This project combines [Eclipse Leshan LwM2M Server](https://github.com/rikard-sics/leshan) with an Encore-based backend API.
 
-## 🛠 Setup Instructions
+
+## ⚙️ Setup Instructions
 
 Follow these steps to get the project up and running locally:
 
 1. **Clone the repository**
-   ```bash
-   git clone https://github.com/AntonisTerzo/encore-leshan-demo.git
+	```bash
+	git clone https://github.com/AntonisTerzo/encore-leshan-demo.git
+	````
 
-Install Encore CLI
+2. Install Encore CLI (for Windows, for other platforms, go to: https://encore.dev/docs/ts/install )
 
-bash
-Kopiera
-Redigera
-curl -sL https://encore.dev/install | bash
-Install dependencies
+	```bash
+	iwr https://encore.dev/install.ps1 | iex
+	````
 
-bash
-Kopiera
-Redigera
-npm install
-Add configuration files
+3. Install dependencies
+	````bash
+	npm install
+	````
 
-Create a .env file in the project root.
+4. Add configuration files
 
-Place a .htpassword file in the nginx/ directory.
+	* Place the .env file in the project root.
+	* Place the .htpassword file in the nginx/ directory.
 
-Build the Encore Docker image
 
-bash
-Kopiera
-Redigera
-encore build ./infra-config.json
-Start the stack
+5. Build the Encore Docker image. Make sure to provide the correct path to `infra-config.json`, located in the project root:
 
-bash
-Kopiera
-Redigera
-docker compose up
-Open interfaces
+	```bash
+	encore build ./infra-config.json
+	````
 
-Access http://localhost/bs
 
-Open http://localhost/dm in a new tab and log in.
+6. Start the stack
 
-Test API endpoints (e.g., using Postman)
+	````bash
+	docker compose up
+	````
 
-Create Bootstrap Endpoint
 
-yaml
-Kopiera
-Redigera
-POST http://localhost/api/bsclients/Test
-Headers:
-  Content-Type: application/json
-  Authorization: mySecretToken
-Body: (from JSON file)
-Create Security Configuration
 
-yaml
-Kopiera
-Redigera
-PUT http://localhost/api/clients
-Headers:
-  Content-Type: application/json
-  Authorization: mySecretToken
-Body: (from JSON file)
-Verify via Leshan Web UI
-Confirm the created bootstrap and security configs appear in both the BS and DM interfaces.
+7. Access Leshan Web UI
+	* Open http://localhost/bs
 
-Run Leshan Client
+	* Open http://localhost/dm in a new tab and log in.
 
-bash
-Kopiera
-Redigera
-java -jar ./leshan-client-demo.jar -b -n Test -msec AAAA -sid BB -rid CC -u 127.0.0.1
-Confirm device registration
+
+8. Test API endpoints (e.g., using Postman)
+
+	* Create Bootstrap Endpoint(Test)
+	````bash
+	POST http://localhost/api/bsclients/Test
+	Headers:
+  	Content-Type: application/json
+  	Authorization: "Token"
+	Body: (from BS_config.txt)
+	````
+
+	* Create Security Configuration
+
+	````bash
+	PUT http://localhost/api/clients
+	Headers:
+  	Content-Type: application/json
+  	Authorization: "Token"
+	Body: (from security_config.txt)
+
+	````
+
+9. Verify via Leshan Web UI
+
+	Confirm the created bootstrap and security configs appear in both the BS and DM interfaces.
+
+
+10. Run Leshan Client
+
+	````bash
+	java -jar ./leshan-client-demo.jar -b -n Test -msec AAAA -sid BB -rid CC -u 127.0.0.1
+	````
+
+11. Confirm device registration
 The client should now appear in the Leshan Server Demo under the "Clients" tab.
+
+
+
