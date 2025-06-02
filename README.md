@@ -29,7 +29,7 @@ Follow these steps to get the project up and running locally:
 	* Place the .htpassword file in the nginx/ directory.
 
 
-5. Build the Encore Docker image. Make sure to provide the correct path to `infra-config.json`, located in the project root:
+5. Build the Encore Docker image, using PowerShell. Make sure to provide your exact path to `infra-config.json`, located in the project root:
 
 	```bash
 	encore build ./infra-config.json
