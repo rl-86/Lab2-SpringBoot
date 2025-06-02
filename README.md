@@ -12,7 +12,7 @@ Follow these steps to get the project up and running locally:
 	git clone https://github.com/AntonisTerzo/encore-leshan-demo.git
 	````
 
-2. Install Encore CLI (for Windows, for other platforms, go to: https://encore.dev/docs/ts/install )
+2. Install Encore CLI for Windows (for other platforms, visit: https://encore.dev/docs/ts/install )
 
 	```bash
 	iwr https://encore.dev/install.ps1 | iex
@@ -52,7 +52,7 @@ Follow these steps to get the project up and running locally:
 
 8. Test API endpoints (e.g., using Postman)
 
-	* Create Bootstrap Endpoint(Test)
+	* Create Bootstrap Endpoint (example: Test)
 	````bash
 	POST http://localhost/api/bsclients/Test
 	Headers:
@@ -84,7 +84,8 @@ Follow these steps to get the project up and running locally:
 	````
 
 11. Confirm device registration
-The client should now appear in the Leshan Server Demo under the "Clients" tab.
+    
+	The client should now appear in the Leshan Server under the "Clients" tab.
 
 
 
