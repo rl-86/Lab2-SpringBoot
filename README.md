@@ -33,12 +33,11 @@ Follow these steps to get the project up and running locally:
 **5. Add configuration files**
 
 * Place the `.env` file in the project root.
-* Place the `.htpassword` file in the nginx/ directory.
+* Create a folder called "nginx" in the root and place the `.htpassword` inside.
 
 
 **6. Build the Encore Docker image, using PowerShell.** 
-* Make sure to provide your exact path to `infra-config.json`, located in the project root:
-* (e.g. "C:/user/encore-leshan-demo/infra-config.json")
+* Make sure to provide your exact path to `infra-config.json`, located in the project root (e.g. "C:/user/encore-leshan-demo/infra-config.json"):
 	````
 	encore build --config ./infra-config.json
 	````
