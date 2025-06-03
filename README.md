@@ -5,7 +5,9 @@ This project combines [Eclipse Leshan LwM2M Server](https://github.com/rikard-si
 
 ## Prerequisites
 * Download [leshan-edhoc-1.0.14.zip](https://github.com/rikard-sics/leshan/releases/tag/v1.0.14), for the "leshan-client-demo.jar"
-* Make sure you have the following installed: [Node.js](https://nodejs.org/dist/v22.16.0/no) - required to run "npm" (download LTS version)
+* Make sure you have the following installed:
+	* [Docker](https://www.docker.com/products/docker-desktop/)
+	* [Node.js](https://nodejs.org/dist/v22.16.0/no) - required to run "npm" (download LTS version)
 
 You can check if Node.js is installed by running:
 
