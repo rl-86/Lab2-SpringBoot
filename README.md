@@ -43,15 +43,12 @@ Follow these steps to get the project up and running locally:
 	````
  
 **7. Start the stack**
-	````
+
 	docker compose up
-	````
+
 
 **8. Access Leshan Web UI**
-* Open http://localhost/bs
-
-* Open http://localhost/dm in a new tab and log in.
-
+* Open http://localhost/bs and http://localhost/dm in a new tab and log in.
 
 **9. Test API endpoints** (e.g., using Postman)
 
