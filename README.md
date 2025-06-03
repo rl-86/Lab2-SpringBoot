@@ -1,12 +1,11 @@
 # Encore Leshan Demo
 
-This project combines [Eclipse Leshan LwM2M Server](https://github.com/rikard-sics/leshan) with an Encore-based backend API.
+This project combines [Eclipse Leshan LwM2M Server](https://github.com/rikard-sics/leshan) (rikard-sics fork) with an Encore-based backend API.
 
 
 ## Prerequisites
-Before you begin, make sure you have the following installed:
-
-[Node.js](https://nodejs.org/dist/v22.16.0/no) – required to run "npm" (download LTS version)
+* Download [leshan-edhoc-1.0.14.zip](https://github.com/rikard-sics/leshan/releases/tag/v1.0.14), for the "leshan-client-demo.jar"
+* Make sure you have the following installed: [Node.js](https://nodejs.org/dist/v22.16.0/no) - required to run "npm" (download LTS version)
 
 You can check if Node.js is installed by running:
 
@@ -60,26 +59,29 @@ Follow these steps to get the project up and running locally:
 * Create Bootstrap Endpoint (example: Test)
 	````
 	POST http://localhost/api/bsclients/Test
+ 
 	Headers:
   	Content-Type: application/json
   	Authorization: "Token"
+ 
 	Body: (from BS_config.txt)
 
 * Create Security Configuration
 	````
 	PUT http://localhost/api/clients
+ 
 	Headers:
   	Content-Type: application/json
   	Authorization: "Token"
+ 
 	Body: (from security_config.txt)
 
 **10. Verify via Leshan Web UI**
 
-* Confirm the created bootstrap and security configs appear in both the BS and DM interfaces.
+* Confirm the created bootstrap and security configs appear in both the Bootstrap and Device-manager interfaces.
 
 
 **11. Run Leshan Client**
-
 
 	java -jar ./leshan-client-demo.jar -b -n Test -msec AAAA -sid BB -rid CC -u 127.0.0.1
 
