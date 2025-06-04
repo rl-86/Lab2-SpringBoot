@@ -65,7 +65,7 @@ Open the following in your browser and log in:
   	Content-Type: application/json
   	Authorization: "Token"
  
-	Body: (paste contents from BS_config.txt)
+	Body: (paste contents from bs_config.txt)
  	````
 * Create Security Configuration
 	````
@@ -75,7 +75,7 @@ Open the following in your browser and log in:
   	Content-Type: application/json
   	Authorization: "Token"
  
-	Body: (paste contents from security_config.txt)
+	Body: (paste contents from dm_config.txt)
 	````
 **10. Verify configurations via Leshan Web UI**
 
