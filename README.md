@@ -41,7 +41,7 @@ Follow these steps to get the project up and running locally:
 **6. Build the Encore Docker image, using PowerShell.** 
 * Make sure to provide your exact path to `infra-config.json`, located in the project root (e.g. "C:/user/encore-leshan-demo/infra-config.json"):
 	````
-	encore build docker --config .\infra-config.json encore-leshan-demo:1.0.0
+	encore build docker --config \infra-config.json encore-leshan-demo:1.0.0
 	````
  
 **7. Start the stack**
