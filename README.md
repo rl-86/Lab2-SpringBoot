@@ -37,9 +37,8 @@ Follow these steps to get the project up and running locally:
 * Place the `.env` file in the project root.
 * Create a folder called "nginx" in the root and place the `.htpassword` inside.
 
-
-**6. Build the Encore Docker image, using PowerShell.** 
-* Make sure to provide your exact path to `infra-config.json`, located in the project root (e.g. "C:/user/encore-leshan-demo/infra-config.json"):
+**6. Build the Encore Docker image.** 
+* Make sure that `infra-config.json` is located in the project root.
 	````
 	encore build docker --config \infra-config.json encore-leshan-demo:1.0.0
 	````
@@ -52,7 +51,7 @@ Follow these steps to get the project up and running locally:
 **8. Access Leshan Web UI**
 * Open http://localhost/bs and http://localhost/dm in a new tab and log in.
 
-**9. Test API endpoints** (e.g., using Postman)
+**9. Test API endpoints** (e.g., using Postman or Insomnia)
 
 * Create Bootstrap Endpoint (example: Test)
 	````
@@ -63,7 +62,7 @@ Follow these steps to get the project up and running locally:
   	Authorization: "Token"
  
 	Body: (from BS_config.txt)
-
+ 	````
 * Create Security Configuration
 	````
 	PUT http://localhost/api/clients
@@ -73,20 +72,21 @@ Follow these steps to get the project up and running locally:
   	Authorization: "Token"
  
 	Body: (from security_config.txt)
-
+	````
 **10. Verify via Leshan Web UI**
 
 * Confirm the created bootstrap and security configs appear in both the Bootstrap and Device-manager interfaces.
 
 
 **11. Run Leshan Client**
-
+* Locate the `leshan-client-demo.jar` file and run it with the following settings. You can download it here: [leshan-edhoc-1.0.14.zip](https://github.com/rikard-sics/leshan/releases/tag/v1.0.14)
+	````
 	java -jar ./leshan-client-demo.jar -b -n Test -msec AAAA -sid BB -rid CC -u 127.0.0.1
-
-
+	````
+ 
 **12. Confirm device registration**
-    
-	The client should now appear in the Leshan Server under the "Clients" tab.
+
+* The client should now appear in the Leshan Server under the "Clients" tab.
 
 
 
