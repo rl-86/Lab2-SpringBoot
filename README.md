@@ -2,14 +2,15 @@
 
 This project combines [Eclipse Leshan LwM2M Server](https://github.com/rikard-sics/leshan) (rikard-sics fork) with an Encore-based backend API.
 
+---
 
 ## Prerequisites
 * Download [leshan-edhoc-1.0.14.zip](https://github.com/rikard-sics/leshan/releases/tag/v1.0.14), for the "leshan-client-demo.jar"
-* Make sure you have the following installed:
-	* [Docker](https://www.docker.com/products/docker-desktop/)
+* Ensure the following tools are installed:
+	* [Docker](https://www.docker.com/products/docker-desktop/) - required to build images and run containers
 	* [Node.js](https://nodejs.org/dist/v22.16.0/no) - required to run "npm" (download LTS version)
 
-You can check if Node.js is installed by running:
+You can verify Node.js installation by running:
 
 	node -v
 
@@ -22,12 +23,12 @@ Follow these steps to get the project up and running locally:
 	git clone https://github.com/AntonisTerzo/encore-leshan-demo.git
 
 
-**3. Install Encore CLI for Windows** (for other platforms, visit: https://encore.dev/docs/ts/install )
+**3. Install Encore CLI (Windows)** (for other platforms, visit: https://encore.dev/docs/ts/install )
 
 	iwr https://encore.dev/install.ps1 | iex
 
 
-**4. Install dependencies**
+**4. Install project dependencies**
 
 	npm install
 
@@ -35,10 +36,10 @@ Follow these steps to get the project up and running locally:
 **5. Add configuration files**
 
 * Place the `.env` file in the project root.
-* Create a folder called "nginx" in the root and place the `.htpassword` inside.
+* Create a folder named "nginx" in the root and place the `.htpassword` file inside it.
 
 **6. Build the Encore Docker image.** 
-* Make sure that `infra-config.json` is located in the project root.
+* Ensure that `infra-config.json` is located in the project root:
 	````
 	encore build docker --config \infra-config.json encore-leshan-demo:1.0.0
 	````
@@ -49,11 +50,14 @@ Follow these steps to get the project up and running locally:
 
 
 **8. Access Leshan Web UI**
-* Open http://localhost/bs and http://localhost/dm in a new tab and log in.
 
-**9. Test API endpoints** (e.g., using Postman or Insomnia)
+Open the following in your browser and log in:
+* http://localhost/bs
+* http://localhost/dm
+  
+**9. Test API endpoints** (e.g., via Postman or Insomnia)
 
-* Create Bootstrap Endpoint (example: Test)
+* Create Bootstrap Endpoint (e.g. `Test`)
 	````
 	POST http://localhost/api/bsclients/Test
  
@@ -61,7 +65,7 @@ Follow these steps to get the project up and running locally:
   	Content-Type: application/json
   	Authorization: "Token"
  
-	Body: (from BS_config.txt)
+	Body: (paste contents from BS_config.txt)
  	````
 * Create Security Configuration
 	````
@@ -71,11 +75,11 @@ Follow these steps to get the project up and running locally:
   	Content-Type: application/json
   	Authorization: "Token"
  
-	Body: (from security_config.txt)
+	Body: (paste contents from security_config.txt)
 	````
-**10. Verify via Leshan Web UI**
+**10. Verify configurations via Leshan Web UI**
 
-* Confirm the created bootstrap and security configs appear in both the Bootstrap and Device-manager interfaces.
+* Check that the created Bootstrap and Security configurations appear in the Leshan Web UI under both the Bootstrap and Device Manager interfaces.
 
 
 **11. Run Leshan Client**
