@@ -31,14 +31,14 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        // Auth endpoints - öppna för alla
+                        // Auth endpoints
                         .requestMatchers("/auth/**").permitAll()
 
-                        // Categories - GET för alla, POST endast för ADMIN
+                        // Categories
                         .requestMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/categories/**").hasRole("ADMIN")
 
-                        // Places - mer granulär kontroll
+                        // Places
                         .requestMatchers(HttpMethod.GET, "/api/v1/places/public/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/places/search/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/places/category/*/public").permitAll()

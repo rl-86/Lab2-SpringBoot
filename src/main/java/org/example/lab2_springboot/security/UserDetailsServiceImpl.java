@@ -1,6 +1,5 @@
 package org.example.lab2_springboot.security;
 
-import org.example.lab2_springboot.model.Role;
 import org.example.lab2_springboot.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
