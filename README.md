@@ -1,96 +1,113 @@
-# Encore Leshan Demo
+# Lab2 Spring Boot Rest API with OAuth2 security and MYSQL database
+To run this project, you will need to follow these steps:
+1. Clone the repository
+2. Run:
+````
+docker compose up -d
+````
+5. Start application, run: Lab2SpringbootApplication
 
-This project combines [Eclipse Leshan LwM2M Server](https://github.com/rikard-sics/leshan) (rikard-sics fork) with an Encore-based backend API.
+8. Test the API using Postman, Insomnia or any other tool.
 
----
+### Authentication Endpoints
 
-## Prerequisites
-* Download [leshan-edhoc-1.0.14.zip](https://github.com/rikard-sics/leshan/releases/tag/v1.0.14), for the "leshan-client-demo.jar"
-* Ensure the following tools are installed:
-	* [Docker](https://www.docker.com/products/docker-desktop/) - required to build images and run containers
-	* [Node.js](https://nodejs.org/dist/v22.16.0/no) - required to run "npm" (download LTS version)
+POST http://localhost:8080/auth/register:
+````
+{
+  "username": "testuser1",
+  "password": "password123"
+}
+````
+or for admin:
 
-You can verify Node.js installation by running:
+````
+{
+  "username": "admin2",
+  "password": "admin123"
+}
+````
+POST http://localhost:8080/auth/login:
 
-	node -v
+````
+{
+  "username": "testuser1",
+  "password": "password123"
+}
+````
+Returns JWT token:
+````
+{
+  "message": "Login successful",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+````
+### Category Endpoints
+GET http://localhost:8080/categories
 
-## ⚙️ Setup Instructions
+Returns list of all categories (no authentication required).
 
-Follow these steps to get the project up and running locally:
+POST http://localhost:8080/categories (Admin only - requires JWT token in header)
+````
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+````
+````
+{
+    "name": "Sevärdheter",
+    "symbol": "🏛️",
+    "description": "Turistattraktioner och sevärdheter"
+}
+````
 
-**1. Clone the repository**
-   
-	git clone https://github.com/AntonisTerzo/encore-leshan-demo.git
+### Place Endpoints
+GET http://localhost:8080/places
 
+Returns all public places + your own private places
+Optional query parameters:
+lat=59.3293 - latitude for geographic search
+lon=18.0686 - longitude for geographic search
+radius=1000 - search radius in meters
 
-**3. Install Encore CLI (Windows)** (for other platforms, visit: https://encore.dev/docs/ts/install )
+POST http://localhost:8080/places (requires JWT token).
+````
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+````
+````
+{
+  "name": "Awesome Café",
+  "description": "Great coffee and pastries",
+  "latitude": 59.3293,
+  "longitude": 18.0686,
+  "categoryId": 1,
+  "isPublic": true
+}
+````
 
-	iwr https://encore.dev/install.ps1 | iex
-
-
-**4. Install project dependencies**
-
-	npm install
-
-
-**5. Add configuration files**
-
-* Place the `.env` file in the project root.
-* Create a folder named "nginx" in the root and place the `.htpassword` file inside it.
-
-**6. Build the Encore Docker image.** 
-* Ensure that `infra-config.json` is located in the project root:
-	````
-	encore build docker --config \infra-config.json encore-leshan-demo:1.0.0
-	````
- 
-**7. Start the stack**
-
-	docker compose up
-
-
-**8. Access Leshan Web UI**
-
-Open the following in your browser and log in:
-* http://localhost/bs
-* http://localhost/dm
-  
-**9. Test API endpoints** (e.g., via Postman or Insomnia)
-
-* Create Bootstrap Endpoint (e.g. `Test`)
-	````
-	POST http://localhost/api/bsclients/Test
- 
-	Headers:
-  	Content-Type: application/json
-  	Authorization: "Token"
- 
-	Body: (paste contents from bs_config.txt)
- 	````
-* Create Security Configuration
-	````
-	PUT http://localhost/api/clients
- 
-	Headers:
-  	Content-Type: application/json
-  	Authorization: "Token"
- 
-	Body: (paste contents from dm_config.txt)
-	````
-**10. Verify configurations via Leshan Web UI**
-
-* Check that the created Bootstrap and Security configurations appear in the Leshan Web UI under both the Bootstrap and Device Manager interfaces.
-
-
-**11. Run Leshan Client**
-* Locate the `leshan-client-demo.jar` file and run it with the following settings. You can download it here: [leshan-edhoc-1.0.14.zip](https://github.com/rikard-sics/leshan/releases/tag/v1.0.14)
-	````
-	java -jar ./leshan-client-demo.jar -b -n Test -msec AAAA -sid BB -rid CC -u 127.0.0.1
-	````
- 
-**12. Confirm device registration**
-
-* The client should now appear in the Leshan Server under the "Clients" tab.
+PUT http://localhost:8080/places/{id} (requires JWT token, can only update your own places)
+Headers:
+````
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+{
+  "name": "Updated Café Name",
+  "description": "Updated description",
+  "latitude": 59.3300,
+  "longitude": 18.0700,
+  "categoryId": 2,
+  "isPublic": false
+}
+````
 
 
+DELETE http://localhost:8080/places/{id} (requires JWT token, can only delete your own places)
+````
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+````
+
+### User Roles
+USER: Can create, read, update and delete their own places
+ADMIN: Can create categories + all USER permissions
+Notes
+All authenticated requests require the JWT token in the Authorization header
+Private places are only visible to their owners
+Public places are visible to everyone
+Geographic search finds places within specified radius
 
