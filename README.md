@@ -110,4 +110,3 @@ All authenticated requests require the JWT token in the Authorization header
 Private places are only visible to their owners
 Public places are visible to everyone
 Geographic search finds places within specified radius
-
