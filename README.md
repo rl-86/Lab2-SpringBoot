@@ -104,8 +104,10 @@ Authorization: Bearer YOUR_JWT_TOKEN_HERE
 
 ### User Roles
 USER: Can create, read, update and delete their own places
+
 ADMIN: Can create categories + all USER permissions
 Notes
+
 All authenticated requests require the JWT token in the Authorization header
 Private places are only visible to their owners
 Public places are visible to everyone
