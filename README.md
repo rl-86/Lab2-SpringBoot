@@ -52,9 +52,9 @@ Authorization: Bearer YOUR_JWT_TOKEN_HERE
 ````
 ````
 {
-    "name": "Sevärdheter",
+    "name": "Tourist attractions",
     "symbol": "🏛️",
-    "description": "Turistattraktioner och sevärdheter"
+    "description": "Tourist attractions and sightseeing"
 }
 ````
 
@@ -108,7 +108,7 @@ USER: Can create, read, update and delete their own places
 ADMIN: Can create categories + all USER permissions
 Notes
 
-All authenticated requests require the JWT token in the Authorization header
-Private places are only visible to their owners
-Public places are visible to everyone
-Geographic search finds places within specified radius
+All authenticated requests require the JWT token in the Authorization header.
+Private places are only visible to their owners.
+Public places are visible to everyone.
+Geographic search finds places within specified radius.
