@@ -99,7 +99,7 @@ Authorization: Bearer YOUR_JWT_TOKEN_HERE
 ````
 
 
-DELETE http://localhost:8080/places/{id} (requires JWT token, can only delete your own places)
+DELETE http://localhost:8080/api/v1/places/{id} (requires JWT token, can only delete your own places)
 ````
 Authorization: Bearer YOUR_JWT_TOKEN_HERE
 ````
