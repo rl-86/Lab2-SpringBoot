@@ -11,14 +11,16 @@ docker compose up -d
 
 ### Authentication Endpoints
 
-POST http://localhost:8080/auth/register:
+
+POST http://localhost:8080/auth/register
 ````
 {
   "username": "testuser1",
   "password": "password123"
 }
 ````
-or for admin:
+
+POST http://localhost:8080/auth/register-admin
 
 ````
 {
@@ -42,24 +44,24 @@ Returns JWT token:
 }
 ````
 ### Category Endpoints
-GET http://localhost:8080/categories
+GET http://localhost:8080/api/v1/categories
 
 Returns list of all categories (no authentication required).
 
-POST http://localhost:8080/categories (Admin only - requires JWT token in header)
+POST http://localhost:8080/api/v1/categories (Admin only - requires JWT token in header)
 ````
 Authorization: Bearer YOUR_JWT_TOKEN_HERE
 ````
 ````
 {
-    "name": "Sevärdheter",
+    "name": "Tourist attractions",
     "symbol": "🏛️",
-    "description": "Turistattraktioner och sevärdheter"
+    "description": "Tourist attractions and sightseeing"
 }
 ````
 
 ### Place Endpoints
-GET http://localhost:8080/places
+GET http://localhost:8080/api/v1/places/public
 
 Returns all public places + your own private places
 Optional query parameters:
@@ -67,7 +69,7 @@ lat=59.3293 - latitude for geographic search
 lon=18.0686 - longitude for geographic search
 radius=1000 - search radius in meters
 
-POST http://localhost:8080/places (requires JWT token).
+POST http://localhost:8080/api/v1/places (requires JWT token).
 ````
 Authorization: Bearer YOUR_JWT_TOKEN_HERE
 ````
@@ -82,7 +84,7 @@ Authorization: Bearer YOUR_JWT_TOKEN_HERE
 }
 ````
 
-PUT http://localhost:8080/places/{id} (requires JWT token, can only update your own places)
+PUT http://localhost:8080/api/v1/places/{id} (requires JWT token, can only update your own places)
 Headers:
 ````
 Authorization: Bearer YOUR_JWT_TOKEN_HERE
@@ -97,7 +99,7 @@ Authorization: Bearer YOUR_JWT_TOKEN_HERE
 ````
 
 
-DELETE http://localhost:8080/places/{id} (requires JWT token, can only delete your own places)
+DELETE http://localhost:8080/api/v1/places/{id} (requires JWT token, can only delete your own places)
 ````
 Authorization: Bearer YOUR_JWT_TOKEN_HERE
 ````
@@ -108,7 +110,7 @@ USER: Can create, read, update and delete their own places
 ADMIN: Can create categories + all USER permissions
 Notes
 
-All authenticated requests require the JWT token in the Authorization header
-Private places are only visible to their owners
-Public places are visible to everyone
-Geographic search finds places within specified radius
+All authenticated requests require the JWT token in the Authorization header.
+Private places are only visible to their owners.
+Public places are visible to everyone.
+Geographic search finds places within specified radius.
