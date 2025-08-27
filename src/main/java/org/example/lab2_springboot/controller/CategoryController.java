@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/categories") // ✅ Matchar SecurityConfig
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
     private final CategoryRepository categoryRepository;
 
